@@ -44,7 +44,7 @@ namespace McIntalkin.Web.App
     {
         public bool Exists(string quote)
         {
-            using (var session = new DocumentStore { Url = ConfigurationManager.AppSettings["RAVENHQ_CONNECTION_STRING"].ToString().Replace("Url=","") }.Initialize().OpenSession())
+            using (var session = new DocumentStore { Url = ConfigurationManager.AppSettings["RavenUrl"].ToString(), ApiKey = ConfigurationManager.AppSettings["RavenApiKey"].ToString() }.Initialize().OpenSession())
             {
                 var sayWhat = (from d in session.Query<SayWhat>() where d.Quote == quote select d).FirstOrDefault();
                 return sayWhat != null;
@@ -52,14 +52,14 @@ namespace McIntalkin.Web.App
         }
         public SayWhat Random()
         {
-            using (var session = new DocumentStore { Url = ConfigurationManager.AppSettings["RAVENHQ_CONNECTION_STRING"].ToString().Replace("Url=", "") }.Initialize().OpenSession())
+            using (var session = new DocumentStore { Url = ConfigurationManager.AppSettings["RavenUrl"].ToString(), ApiKey = ConfigurationManager.AppSettings["RavenApiKey"].ToString() }.Initialize().OpenSession())
             {
                 return session.Advanced.LuceneQuery<SayWhat>().RandomOrdering().FirstOrDefault();
             }
         }
         public void Add(SayWhat request)
         {
-            using (var session = new DocumentStore { Url = ConfigurationManager.AppSettings["RAVENHQ_CONNECTION_STRING"].ToString().Replace("Url=", "") }.Initialize().OpenSession())
+            using (var session = new DocumentStore { Url = ConfigurationManager.AppSettings["RavenUrl"].ToString(), ApiKey = ConfigurationManager.AppSettings["RavenApiKey"].ToString() }.Initialize().OpenSession())
             {
                 session.Store(request);
                 session.SaveChanges();
