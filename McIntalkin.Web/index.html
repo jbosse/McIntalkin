@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bootstrap 101 Template</title>
+    <!-- Bootstrap -->
+    <link href="content/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="content/mcintalkin.css" rel="stylesheet" media="screen">
+  </head>
+    <body>
+        <div class="content">
+            <div class="say_what_container"><span id="say_what">...</span></div>
+            <div class="bubble"></div>
+        </div>
+        <div class="row">
+            <input id="quote" type="text" placeholder="say what?"/>
+        </div>
+        <div class="row">
+            <button class="btn" id="add_saying">Now you're McIntalkin'!</button>
+        </div>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+      <script src="scripts/bootstrap.min.js"></script>
+      <script src="scripts/JsonServiceClient.js"></script>
+      <script>
+          $(function () {
+              var client = new JsonServiceClient('/');
+              $('#add_saying').on('click', null, function () {
+                  client.postToService('saywhat', { Quote: $('#quote').val() }, function (response) {
+                      $('#say_what').text($('#quote').val());
+                      $('#quote').val('');
+                  }, function (response) {
+                      console.log(response.ResponseStatus.Message);
+                  });
+              });
+              client.getFromService('saywhat', null, function (response) {
+                  $('#say_what').text(response.Quote);
+              }, function (response) {
+                  console.log(response.ResponseStatus.Message);
+              });
+          });
+      </script>
+  </body>
+</html>

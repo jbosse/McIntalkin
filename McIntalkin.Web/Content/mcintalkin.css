@@ -1,0 +1,48 @@
+﻿body {
+    background-color: #150069;
+}
+.content {
+    background-image: url('images/mcintalkin.png');
+    width: 600px;
+    height: 600px;
+    margin: auto;
+    text-align: center;
+}
+
+.say_what_container {
+    position: relative;
+    top: 166px;
+    left: 0px;
+    width: 175px;
+    height: 90px;
+    background-color: #fff;
+    border: 2px solid #000;
+    padding: 12px;
+    overflow: hidden;
+    text-align:center;
+    display:table;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+}
+
+#say_what {   
+    margin: 0 auto;
+    display:table-cell;
+    vertical-align: middle;
+    text-align:center;
+}
+
+.bubble {
+    width: 20px;
+    height: 2px;
+    background-color: #fff;
+    position: relative;
+    top: 164px;
+    left: 149px;
+}
+
+.row {
+    position: relative;
+    top: -80px;
+    text-align: center;
+}
