@@ -1,0 +1,4 @@
+McIntalkin
+==========
+
+Random McIntalk Quote
