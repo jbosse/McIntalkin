@@ -22,6 +22,13 @@
       <script src="scripts/JsonServiceClient.js"></script>
       <script>
           $(function () {
+              function sayIt(){
+                client.getFromService('saywhat', null, function (response) {
+                    $('#say_what').text(response.Quote);
+                }, function (response) {
+                    console.log(response.ResponseStatus.Message);
+                });
+              }
               var client = new JsonServiceClient('/');
               $('#add_saying').on('click', null, function () {
                   client.postToService('saywhat', { Quote: $('#quote').val() }, function (response) {
@@ -31,11 +38,8 @@
                       console.log(response.ResponseStatus.Message);
                   });
               });
-              client.getFromService('saywhat', null, function (response) {
-                  $('#say_what').text(response.Quote);
-              }, function (response) {
-                  console.log(response.ResponseStatus.Message);
-              });
+              sayIt();
+              setInterval(sayIt, 3000);
           });
       </script>
   </body>
